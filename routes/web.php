@@ -14,3 +14,7 @@
 Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes();
+
+Route::get('test', function (){
+    phpinfo();
+});
