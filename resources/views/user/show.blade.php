@@ -17,10 +17,11 @@
                         <div class="media-body">
                             <hr>
                             <h4><strong>个人简介</strong></h4>
-                            <p>这个人很懒，什么也没有留下。</p>
+                            <p>{{ $user->introduction }}</p>
                             <hr>
-                            <h4><strong>注册于</strong>ong</h4>
-                            <p>2017-12-11</p>
+                            <h4><strong>注册于</strong></h4>
+                            {{--时间戳的友好输出--}}
+                            <p>{{ $user->created_at->diffForHumans() }}</p>
                         </div>
                     </div>
                 </di>
