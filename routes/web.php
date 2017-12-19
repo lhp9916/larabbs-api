@@ -10,11 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//首页
 Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes();
 
+//用户
+Route::resource('users','UsersController',['only'=>['show','update','edit']]);
+
+//测试
 Route::get('test', function (){
     phpinfo();
 });
