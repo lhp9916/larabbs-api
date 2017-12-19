@@ -10,11 +10,10 @@
                 <di class="panel-body">
                     <div class="media">
                         <div align="center">
-                            <img src="https://avatars1.githubusercontent.com/u/10591282?s=460&v=4"
-                                 class="img-responsive thumbnail" width="300px" height="300px">
+                            <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="300px" height="300px">
                         </div>
 
-                        <div class="media-body">
+                        <div class="media-body" style="padding-left: 10px;">
                             <hr>
                             <h4><strong>个人简介</strong></h4>
                             <p>{{ $user->introduction }}</p>
