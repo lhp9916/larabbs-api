@@ -22,3 +22,4 @@ Route::resource('users','UsersController',['only'=>['show','update','edit']]);
 Route::get('test', function (){
     phpinfo();
 });
+Route::resource('topics', 'TopicsController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
