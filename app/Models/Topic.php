@@ -24,4 +24,32 @@ class Topic extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeWithOrder($query, $order)
+    {
+        //不同的排序，使用不同数据读取逻辑
+        switch ($order) {
+            case 'recent':
+                $query = $this->recent();
+                break;
+            default:
+                $query = $this->recentReplied();
+                break;
+        }
+        //预加载，防止n+1的问题
+        return $query->with('user', 'category');
+    }
+
+    public function scopeRecent($query)
+    {
+        //按照时间顺序排序
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    //最新回复
+    public function scopeRecentReplied($query)
+    {
+        return $query->orderBy('updated_at', 'desc');
+    }
+
 }
