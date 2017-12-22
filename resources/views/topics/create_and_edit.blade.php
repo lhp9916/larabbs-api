@@ -36,9 +36,10 @@
 
                                     <div class="form-group">
                                         <select class="form-control" name="category_id" required>
-                                            <option value="" hidden disabled selected>请选择分类</option>
+                                            <option value="" hidden disabled {{ $topic->id?'':'selected' }}>请选择分类
+                                            </option>
                                             @foreach($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}" {{ $category->id==$topic->category_id?'selected':'' }}>{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -78,11 +79,11 @@
                 upload: {
                     url: '{{ route('topics.upload_image') }}',
                     params: {_token: '{{ csrf_token() }}'},
-                    fileKey:'upload_file',
-                    connectionCount:3,
-                    leaveConfirm:'文件上传中，关闭次页面将取消上传'
+                    fileKey: 'upload_file',
+                    connectionCount: 3,
+                    leaveConfirm: '文件上传中，关闭次页面将取消上传'
                 },
-                pasteImage:true,//是否支持图片黏贴上传
+                pasteImage: true,//是否支持图片黏贴上传
             });
         });
     </script>
