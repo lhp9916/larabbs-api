@@ -26,6 +26,11 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('backup:run')->daily()->at('02:00');
+        $schedule->command('backup:clean')->daily()->at('03:00');
+
+        //crontab
+        // * * * * * /usr/bin/php  /home/lhp/workspace/larabbs/artisan schedule:run >> /dev/null 2>&1
     }
 
     /**
