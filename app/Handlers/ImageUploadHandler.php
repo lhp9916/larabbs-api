@@ -4,7 +4,7 @@ namespace App\Handlers;
 
 use Image;
 
-class ImageHandler
+class ImageUploadHandler
 {
     protected $allowed_ext = ['png', 'jpg', 'jpeg'];
 
@@ -18,7 +18,7 @@ class ImageHandler
      */
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
-        $folder_name = "upload/images/$folder/" . date('Ym', time()) . '/' . date("d", time()) . '/';
+        $folder_name = "upload/images/$folder/" . date('Ym', time()) . '/' . date("d", time());
 
         $upload_path = public_path() . '/' . $folder_name;
 
