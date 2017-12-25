@@ -18,4 +18,9 @@ class ReplyObserver
     {
         $reply->topic->increment('replay_count', 1);
     }
+
+    public function deleted(Reply $reply)
+    {
+        $reply->topic->decrement('replay_count', 1);
+    }
 }
