@@ -24,7 +24,7 @@ Route::resource('categories', 'CategoriesController', ['only' => 'show']);
 
 //主题
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
-Route::get('topics/{topic}/{slug?}','TopicsController@show')->name('topics.show');
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
 Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
@@ -34,4 +34,5 @@ Route::get('test', function () {
 
 });
 
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+//回复
+Route::resource('replies', 'RepliesController', ['only' => ['store', 'destroy']]);
