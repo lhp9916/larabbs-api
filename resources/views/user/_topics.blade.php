@@ -21,4 +21,4 @@
 @endif
 
 {{--分页--}}
-{!! $topic->render !!}
+{!! $topics->render() !!}
