@@ -12,8 +12,6 @@
 */
 
 //首页
-use App\Handlers\SlugTranslateHandle;
-
 Route::get('/', 'PagesController@root')->name('root');
 
 Auth::routes();
