@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Auth;
+use function GuzzleHttp\Psr7\str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
@@ -63,5 +64,25 @@ class User extends Authenticatable
         $this->notification_count = 0;
         $this->save();
         $this->unreadNotifications->markAsRead();
+    }
+
+    public function setPasswordAttribute($value)
+    {
+        if (strlen($value) != 60) {
+            $value = bcrypt($value);
+        }
+
+        return $this->attributes['password'] = $value;
+    }
+
+    public function setAvatarAttribute($value)
+    {
+        //如果不是 http 开头，那就从后台上传的，需要补全 URL
+        if (!starts_with($value, 'http')) {
+
+            $value = config('app.url') . "/upload/images/avatars/$value";
+        }
+
+        $this->attributes['avatar'] = $value;
     }
 }
