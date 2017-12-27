@@ -3,9 +3,9 @@
 use Spatie\Permission\Models\Role;
 
 return [
-    'title' => '角色',
+    'title'  => '角色',
     'single' => '角色',
-    'model' => Role::class,
+    'model'  => Role::class,
 
     'permission' => function () {
         return Auth::user()->can('manage_contents');
@@ -17,8 +17,8 @@ return [
         'name' => ['title' => '标识'],
 
         'permissions' => [
-            'title' => '权限',
-            'output' => function ($value, $model) {
+            'title'    => '权限',
+            'output'   => function ($value, $model) {
                 $model->load('permissions');
                 $result = [];
                 foreach ($model->permissions as $permission) {
@@ -31,8 +31,8 @@ return [
         ],
 
         'operation' => [
-            'title' => '管理',
-            'output' => function ($value, $model) {
+            'title'    => '管理',
+            'output'   => function ($value, $model) {
                 return $value;
             },
             'sortable' => false,
@@ -43,13 +43,13 @@ return [
         'name' => ['title' => '标识',],
 
         'permissions' => [
-            'type' => 'relationship',
-            'title' => '权限',
+            'type'       => 'relationship',
+            'title'      => '权限',
             'name_field' => 'name',
-        ]
+        ],
     ],
 
-    'filters' => [
+    'filters'  => [
         'id' => ['title' => 'ID'],
 
         'name' => ['title' => '标识'],
@@ -57,13 +57,13 @@ return [
     ],
 
     //新建和编辑时验证规则
-    'rules' => [
+    'rules'    => [
         'name' => 'required|max:15|unique:roles,name',
     ],
 
     //表单验证错误时消息定制
     'messages' => [
         'name.required' => '标识不能为空',
-        'name.unique' => '标识已存在',
-    ]
+        'name.unique'   => '标识已存在',
+    ],
 ];
