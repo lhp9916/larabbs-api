@@ -80,13 +80,11 @@ return [
             'options_sort_field' => 'id',
         ],
         'category' => [
-            'title' => [
-                'title'              => '分类',
-                'type'               => 'relationship',
-                'name_field'         => 'name',
-                'search_fields'      => ["CONCAT(id,' ',name)"],
-                'options_sort_field' => 'id',
-            ],
+            'title'              => '分类',
+            'type'               => 'relationship',
+            'name_field'         => 'name',
+            'search_fields'      => ["CONCAT(id,' ',name)"],
+            'options_sort_field' => 'id',
         ],
     ],
 
