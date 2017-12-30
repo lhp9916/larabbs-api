@@ -29,6 +29,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('backup:run')->daily()->at('02:00');
         $schedule->command('backup:clean')->daily()->at('02:10');
         $schedule->command('larabbs:calculate-active-user')->hourly();
+        $schedule->command('larabbs:sync-user-actived-at')->dailyAt('00:00');
 
         //crontab
         // * * * * * /usr/bin/php  /home/lhp/workspace/larabbs/artisan schedule:run >> /dev/null 2>&1
