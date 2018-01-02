@@ -7,7 +7,7 @@
 
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs user-info">
             <div class="panel panel-default">
-                <di class="panel-body">
+                <div class="panel-body">
                     <div class="media">
                         <div align="center">
                             <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="300px"
@@ -27,7 +27,7 @@
                             <p title="{{ $user->last_actived_at }}">{{ $user->last_actived_at->diffForHumans() }}</p>
                         </div>
                     </div>
-                </di>
+                </div>
             </div>
         </div>
 
