@@ -3,13 +3,14 @@
 namespace App\Handlers;
 
 use Image;
+use Storage;
 
 class ImageUploadHandler
 {
     protected $allowed_ext = ['png', 'jpg', 'jpeg'];
 
     /**
-     * 上传文件到public/upload/images目录下
+     * 上传文件到七牛云
      * @param $file
      * @param $folder
      * @param $file_prefix
@@ -18,9 +19,7 @@ class ImageUploadHandler
      */
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
-        $folder_name = "upload/images/$folder/" . date('Ym', time()) . '/' . date("d", time());
-
-        $upload_path = public_path() . '/' . $folder_name;
+        $folder_name = "images/$folder/" . date('Ym', time()) . '/' . date("d", time());
 
         $extension = strtolower($file->getClientOriginalExtension()) ?: 'png';
         $filename = $file_prefix . '_' . time() . '_' . str_random(10) . '.' . $extension;
@@ -28,15 +27,17 @@ class ImageUploadHandler
         if (!in_array($extension, $this->allowed_ext)) {
             return false;
         }
-        //将图片移动到制定的目录中
-        $file->move($upload_path, $filename);
 
         if ($max_width && $extension != 'gif') {
-            $this->reduceSize($upload_path . '/' . $filename, $max_width);
+            $this->reduceSize($file->getRealPath(), $max_width);
         }
 
+        //将图片上传刀七牛云
+        $disk = Storage::disk('qiniu');
+        $disk->write("$folder_name/$filename", file_get_contents($file->getRealPath()));
+
         return [
-            'path' => config('app.url') . "/$folder_name/$filename",
+            'path' => 'http://' . env('QINIU_DOMAIN') . "/$folder_name/$filename",
         ];
     }
 
