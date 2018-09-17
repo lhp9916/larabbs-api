@@ -60,7 +60,7 @@ trait ActiveUserHelper
 
         foreach ($users as $user_id => $user) {
             $user = $this->find($user_id);
-            if (count($user)) {
+            if (count($user->toArray())) {
                 $active_users->push($user);
             }
         }
