@@ -23,6 +23,7 @@ $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
 ], function ($api) {
 
+    // 登录相关 每分钟10次
     $api->group([
         'middleware' => 'api.throttle',
         'limit'      => config('api.rate_limits.sign.limit'),
@@ -34,6 +35,18 @@ $api->version('v1', [
         //用户注册
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
+        // 图片验证码
+        $api->post('captchas', 'CaptchasController@store')
+            ->name('api.captchas.store');
+    });
+
+    //每分钟60次
+    $api->group([
+        'middleware' => 'api.throttle',
+        'limit'      => config('api.rate_limits.access.limit'),
+        'expires'    => config('api.rate_limits.access.expires'),
+    ], function ($api) {
+
     });
 
 });
