@@ -20,8 +20,8 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => 'serializer:array'
+    'namespace'  => 'App\Http\Controllers\Api',
+    'middleware' => ['serializer:array', 'bindings'],
 ], function ($api) {
 
     // 登录相关 每分钟10次
@@ -77,6 +77,8 @@ $api->version('v1', [
             // 发布话题
             $api->post('topics', 'TopicsController@store')
                 ->name('api.topics.store');
+            $api->patch('topics/{topic}', 'TopicsController@update')
+                ->name('api.topics.update');
         });
 
     });
