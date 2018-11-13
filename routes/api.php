@@ -21,6 +21,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => 'serializer:array'
 ], function ($api) {
 
     // 登录相关 每分钟10次
@@ -58,6 +59,14 @@ $api->version('v1', [
         'limit'      => config('api.rate_limits.access.limit'),
         'expires'    => config('api.rate_limits.access.expires'),
     ], function ($api) {
+        // 游客接口
+
+        // 需要登录的接口
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            // 当前登录用户信息
+            $api->get('user', 'UsersController@me')
+                ->name('api.user.show');
+        });
 
     });
 
