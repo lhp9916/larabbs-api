@@ -118,14 +118,14 @@ class AuthorizationsController extends Controller
             // 获取对应的用户
             $user = Auth::guard('api')->getUser();
             $attributes['weapp_openid'] = $data['openid'];
-
-            // 更新用户数据
-            $user->update($attributes);
-
-            // 为对应用户创建 jwt
-            $token = Auth::guard('api')->fromUser($user);
-            return $this->respondWithToken($token)->setStatusCode(201);
         }
+
+        // 更新用户数据
+        $user->update($attributes);
+
+        // 为对应用户创建 jwt
+        $token = Auth::guard('api')->fromUser($user);
+        return $this->respondWithToken($token)->setStatusCode(201);
     }
 
     // 刷新 token
