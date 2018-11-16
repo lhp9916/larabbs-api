@@ -31,14 +31,22 @@ class ImageUploadHandler
         if ($max_width && $extension != 'gif') {
             $this->reduceSize($file->getRealPath(), $max_width);
         }
+        if (env('UPLOAD_DISK', '') == 'qiniu') {
+            //将图片上传刀七牛云
+            $disk = Storage::disk('qiniu');
+            $disk->write("$folder_name/$filename", file_get_contents($file->getRealPath()));
 
-        //将图片上传刀七牛云
-        $disk = Storage::disk('qiniu');
-        $disk->write("$folder_name/$filename", file_get_contents($file->getRealPath()));
-
-        return [
-            'path' => 'http://' . env('QINIU_DOMAIN') . "/$folder_name/$filename",
-        ];
+            return [
+                'path' => 'http://' . env('QINIU_DOMAIN') . "/$folder_name/$filename",
+            ];
+        } else {
+            $upload_path = public_path() . '/upload/' . $folder_name;
+            //将图片移动到制定的目录中
+            $file->move($upload_path, $filename);
+            return [
+                'path' => config('app.url') . "/upload/$folder_name/$filename",
+            ];
+        }
     }
 
     /**
