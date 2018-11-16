@@ -15,7 +15,7 @@
                             {{ $topic->title }}
                         </a>
                         <a class="pull-right" href="{{ $topic->link() }}">
-                            <span class="badge">{{ $topic->replay_count }}</span>
+                            <span class="badge">{{ $topic->reply_count }}</span>
                         </a>
                     </div>
 

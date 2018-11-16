@@ -39,7 +39,7 @@
                         {{ $topic->created_at->diffForHumans() }}
                         -
                         <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                        {{ $topic->replay_count }}
+                        {{ $topic->reply_count }}
                     </div>
 
                     <div class="topic-body">
