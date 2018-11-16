@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Requests\Api\TopicRequest;
-use App\Http\Requests\Request;
 use App\Models\Topic;
 use App\Models\User;
 use App\Transformers\TopicTransformer;
+use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
